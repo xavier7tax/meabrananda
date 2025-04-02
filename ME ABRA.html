@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador Relógio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Lora', serif;
+      background: radial-gradient(circle, #800080, #4B0082);
+      color: white;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 15px;
+      text-align: center;
+      padding: 0 15px;
+    }
+
+    .decorations {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .decorations div {
+      position: absolute;
+      font-size: 2em;
+      color: white;
+      opacity: 0.2;
+      animation: float 10s infinite ease-in-out;
+    }
+
+    .heart {
+      font-size: 1.5em;
+    }
+
+    .infinity {
+      font-size: 1.3em;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+
+    .clock {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      border: 10px solid white;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .clock span {
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .clock:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .tick-mark {
+      position: absolute;
+      width: 3px;
+      height: 15px;
+      background: white;
+      top: 5px;
+      left: 50%;
+      transform-origin: center 125px;
+    }
+
+    .clock .tick-mark:nth-child(1) { transform: translateX(-50%) rotate(0deg); }
+    .clock .tick-mark:nth-child(2) { transform: translateX(-50%) rotate(30deg); }
+    .clock .tick-mark:nth-child(3) { transform: translateX(-50%) rotate(60deg); }
+    .clock .tick-mark:nth-child(4) { transform: translateX(-50%) rotate(90deg); }
+    .clock .tick-mark:nth-child(5) { transform: translateX(-50%) rotate(120deg); }
+    .clock .tick-mark:nth-child(6) { transform: translateX(-50%) rotate(150deg); }
+    .clock .tick-mark:nth-child(7) { transform: translateX(-50%) rotate(180deg); }
+    .clock .tick-mark:nth-child(8) { transform: translateX(-50%) rotate(210deg); }
+    .clock .tick-mark:nth-child(9) { transform: translateX(-50%) rotate(240deg); }
+    .clock .tick-mark:nth-child(10) { transform: translateX(-50%) rotate(270deg); }
+    .clock .tick-mark:nth-child(11) { transform: translateX(-50%) rotate(300deg); }
+    .clock .tick-mark:nth-child(12) { transform: translateX(-50%) rotate(330deg); }
+
+    .message {
+      margin-top: 15px;
+      font-size: 1em;
+      text-align: center;
+      font-weight: bold;
+      padding: 0 10px;
+    }
+
+    .message-box {
+      position: absolute;
+      bottom: 10px;
+      width: 90%;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      font-size: 0.9em;
+    }
+
+    .message-box p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>
+    MARIA FERNANDA & ThIAGO 💍💍
+  </h1>
+
+  <div class="decorations">
+    <div class="heart" style="top: 5%; left: 10%;">❤️</div>
+    <div class="infinity" style="top: 20%; right: 10%;">∞</div>
+    <div class="heart" style="bottom: 20%; left: 8%;">❤️</div>
+    <div class="infinity" style="bottom: 15%; right: 15%;">∞</div>
+    <div class="heart" style="top: 40%; right: 25%;">❤️</div>
+    <div class="infinity" style="top: 60%; left: 20%;">∞</div>
+    <div class="heart" style="bottom: 10%; left: 25%;">❤️</div>
+    <div class="infinity" style="bottom: 45%; right: 30%;">∞</div>
+  </div>
+
+  <div class="clock">
+    <div class="tick-mark"></div>
+    <div class="tick-mark"></div>
+    <div class="tick-mark"></div>
+    <div class="tick-mark"></div>
+    <div class="tick-mark"></div>
+    <div class="tick-mark"></div>
+    <div class="tick-mark"></div>
+    <div class="tick-mark"></div>
+    <div class="tick-mark"></div>
+    <div class="tick-mark"></div>
+    <div class="tick-mark"></div>
+    <div class="tick-mark"></div>
+    <span id="timer">Carregando...</span>
+  </div>
+
+  <div class="message" id="daysLeft">X dias para o nosso dia</div>
+
+  <div class="message-box">
+    <p>Estou ansioso para ter você sempre ao meu lado, eu te amo muito meu amor!</p>
+    <p><em>1 Coríntios 13: 1 a 8</em></p>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      function updateCountdown() {
+        const targetDate = new Date('2025-08-27T00:00:00');
+        const now = new Date();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+          document.getElementById('timer').textContent = "Chegou nosso dia!";
+          document.getElementById('daysLeft').textContent = '';
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('timer').textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        document.getElementById('daysLeft').textContent = `${days} dias para o nosso dia`;
+      }
+
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    });
+  </script>
+</body>
+</html>
